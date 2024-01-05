@@ -25,6 +25,16 @@ for filename in os.listdir(source_folder):
 
     source_file = os.path.join(source_folder, filename)
     destination_file = os.path.join(destination, filename)
-    shutil.move(source_file, destination_file)
+    
+    print(f"Moving '{source_file}' to '{destination_file}'")
+    
+    # Check if the source file exists before moving
+    if os.path.exists(source_file):
+        try:
+            shutil.move(source_file, destination_file)
+        except FileNotFoundError as e:
+            print(f"Error: {e}")
+    else:
+        print(f"Source file '{source_file}' does not exist. Skipping.")
 
 print("Files separated successfully!")
